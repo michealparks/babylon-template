@@ -1,6 +1,7 @@
 {
   "include": ["src"],
   "types": ["babylonjs"],
+  "lib": ["dom"],
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",

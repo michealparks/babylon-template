@@ -5,10 +5,7 @@ export default {
     src: '/_dist_',
   },
   plugins: [
-    '@snowpack/plugin-typescript',
-    ['snowpack-plugin-replace', {
-      list: []
-    }]
+    '@snowpack/plugin-typescript'
   ],
   install: [
     /* ... */

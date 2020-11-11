@@ -1,6 +1,6 @@
+import alias from '@rollup/plugin-alias'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import builtins from 'rollup-plugin-node-builtins'
 import copy from 'rollup-plugin-copy'
 
 export default [
@@ -11,9 +11,14 @@ export default [
       format: 'es'
     },
     plugins: [
+      alias({
+        entries: {
+          fs: require.resolve('./scripts/shims/noop'),
+          path: require.resolve('./scripts/shims/noop')
+        }
+      }),
       nodeResolve(),
       commonjs(),
-      builtins(),
       copy({
         targets: [
           { src: 'node_modules/ammo.js/builds/ammo.wasm.wasm', dest: 'public' }

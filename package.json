@@ -13,16 +13,15 @@
     "@babylonjs/post-processes": "^4.1.0",
     "@babylonjs/procedural-textures": "^4.1.0",
     "@babylonjs/serializers": "^4.1.0",
+    "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@snowpack/plugin-typescript": "^1.1.0",
-    "@types/snowpack-env": "^2.3.0",
+    "@types/snowpack-env": "^2.3.2",
     "ammo.js": "github:kripken/ammo.js",
     "rollup-plugin-copy": "^3.3.0",
-    "rollup-plugin-node-builtins": "^2.1.2",
-    "snowpack": "^2.17.0",
-    "snowpack-plugin-replace": "^1.0.4",
-    "typescript": "^4.0.0"
+    "snowpack": "^2.17.1",
+    "typescript": "^4.0.5"
   },
   "dependencies": {
     "rollup": "^2.33.1"

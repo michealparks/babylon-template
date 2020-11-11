@@ -6,6 +6,8 @@ import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight'
 import { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { AmmoJSPlugin } from '@babylonjs/core/Physics/Plugins/ammoJSPlugin'
 import { PhysicsImpostor } from '@babylonjs/core/Physics/physicsImpostor'
+import { SceneLoader } from '@babylonjs/core/Loading'
+import { GLTFLoader } from '@babylonjs/loaders/glTF/2.0/glTFLoader'
 
 // Required side effects to populate the Create methods on the mesh class.
 // Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
@@ -23,7 +25,7 @@ const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio)
 const scene = new Scene(engine)
 
 // This creates and positions a free camera (non-mesh)
-const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene)
+const camera = new FreeCamera('camera1', new Vector3(-4, 5, 10), scene)
 
 // This targets the camera to scene origin
 camera.setTarget(Vector3.Zero())
@@ -58,12 +60,21 @@ const init = async () => {
   const ammoPlugin = new AmmoJSPlugin(useDeltaForWorldStep, Ammo)
   scene.enablePhysics(gravityVector, ammoPlugin)
 
-  const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene)
-  const sphere = Mesh.CreateSphere("sphere1", 16, 2, scene)
+  const ground = Mesh.CreateGround("ground1", 3.8, 3.8, 2, scene)
+  const sphere = Mesh.CreateSphere("sphere1", 32, 1, scene)
+
+  ground.position.y = -0.01
   
-  sphere.physicsImpostor = new PhysicsImpostor(sphere, PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.9 }, scene);
-	ground.physicsImpostor = new PhysicsImpostor(ground, PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene);
+  sphere.physicsImpostor = new PhysicsImpostor(sphere, PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.9 }, scene)
+  ground.physicsImpostor = new PhysicsImpostor(ground, PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene)
   sphere.position.y = 5
+
+  const gltf = await SceneLoader.AppendAsync('./assets/glb/', 'pixel_room.glb', scene)
+
+  console.log(gltf)
+  for (const texture of gltf.textures) {
+    texture.updateSamplingMode(8)
+  }
 }
 
 init()

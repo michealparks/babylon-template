@@ -21,9 +21,6 @@ const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio)
 const scene = new Scene(engine)
 
-
-
-
 // This creates and positions a free camera (non-mesh)
 const camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene)
 
@@ -53,14 +50,14 @@ const init = async () => {
       import('@babylonjs/inspector')
     ])
 
-    const Ammo = await window.InitAmmo()
-    const useDeltaForWorldStep = true
-    const gravityVector = new Vector3(0, -9.81, 0)
-    const ammoPlugin = new AmmoJSPlugin(useDeltaForWorldStep, Ammo)
-    scene.enablePhysics(gravityVector, ammoPlugin)
-
     scene.debugLayer.show()
   }
+
+  const Ammo = await window.InitAmmo()
+  const useDeltaForWorldStep = true
+  const gravityVector = new Vector3(0, -9.81, 0)
+  const ammoPlugin = new AmmoJSPlugin(useDeltaForWorldStep, Ammo)
+  scene.enablePhysics(gravityVector, ammoPlugin)
 }
 
 init()

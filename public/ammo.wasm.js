@@ -1104,6 +1104,4 @@ Object.defineProperty(Z.prototype,"m_hitPointLocal",{get:Z.prototype.oA,set:Z.pr
 module.exports = Ammo;
 });
 
-console.log(ammo_wasm);
-
 window.InitAmmo = ammo_wasm;

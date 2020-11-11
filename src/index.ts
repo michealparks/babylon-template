@@ -5,6 +5,7 @@ import { FreeCamera } from '@babylonjs/core/Cameras/freeCamera'
 import { HemisphericLight } from '@babylonjs/core/Lights/hemisphericLight'
 import { Mesh } from '@babylonjs/core/Meshes/mesh'
 import { AmmoJSPlugin } from '@babylonjs/core/Physics/Plugins/ammoJSPlugin'
+import { PhysicsImpostor } from '@babylonjs/core/Physics/physicsImpostor'
 
 // Required side effects to populate the Create methods on the mesh class.
 // Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
@@ -36,8 +37,6 @@ const light = new HemisphericLight('light1', new Vector3(0, 1, 0), scene)
 // Default intensity is 1. Let's dim the light a small amount
 light.intensity = 0.7
 
-const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene)
-
 // Render every frame
 engine.runRenderLoop(() => {
   scene.render()
@@ -58,6 +57,13 @@ const init = async () => {
   const gravityVector = new Vector3(0, -9.81, 0)
   const ammoPlugin = new AmmoJSPlugin(useDeltaForWorldStep, Ammo)
   scene.enablePhysics(gravityVector, ammoPlugin)
+
+  const ground = Mesh.CreateGround("ground1", 6, 6, 2, scene)
+  const sphere = Mesh.CreateSphere("sphere1", 16, 2, scene)
+  
+  sphere.physicsImpostor = new PhysicsImpostor(sphere, PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.9 }, scene);
+	ground.physicsImpostor = new PhysicsImpostor(ground, PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene);
+  sphere.position.y = 5
 }
 
 init()

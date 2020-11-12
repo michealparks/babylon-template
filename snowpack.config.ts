@@ -11,7 +11,7 @@ export default {
     /* ... */
   ],
   installOptions: {
-    installTypes: true,
+    installTypes: true
   },
   devOptions: {
     /* ... */

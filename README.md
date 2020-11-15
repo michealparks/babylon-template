@@ -1,5 +1,5 @@
 # babylon-template
-A template project for Babylon.js + Typescript
+A project template for Babylon.js + Typescript
 
 ### Getting started
 1. `npm install`

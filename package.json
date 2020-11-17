@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node --max-old-space-size=4096 ./node_modules/snowpack/index.bin.js dev",
+    "start": "node --max-old-space-size=4096 ./node_modules/snowpack/index.bin.js dev --polyfill-node",
     "build": "node --max-old-space-size=4096 ./node_modules/snowpack/index.bin.js build --polyfill-node",
     "rollup": "rollup -c"
   },

@@ -10,6 +10,17 @@ export const addPostProcess = (scene: Scene, cameras: Camera[]) => {
   // MSAA
   pipeline.samples = 4
 
+  // FXAA
+  pipeline.fxaaEnabled = true
+
+  // Image processing
+  pipeline.imageProcessingEnabled = true
+  pipeline.imageProcessing.contrast = 1
+  pipeline.imageProcessing.exposure = 1
+
+  // Tonemapping
+  pipeline.imageProcessing.toneMappingEnabled = true
+
   // Bloom
   pipeline.bloomEnabled = true
   pipeline.bloomThreshold = 0.2

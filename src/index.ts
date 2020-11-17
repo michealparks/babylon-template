@@ -11,6 +11,7 @@ import { SceneLoader } from '@babylonjs/core/Loading'
 // Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
 import '@babylonjs/core/Meshes/meshBuilder'
 import '@babylonjs/core/Materials/standardMaterial'
+import '@babylonjs/core/Physics/physicsEngineComponent'
 
 import { initPhysics, addPhysicsImposter } from './physics'
 import { addPostProcess } from './addPostProcess'
@@ -69,7 +70,7 @@ const init = async () => {
     })
   }
 
-  promises.push(initPhysics())
+  await initPhysics(scene)
 
   {
     const width = 3.8
@@ -77,7 +78,7 @@ const init = async () => {
     const subdivisions = 1
     const ground = Mesh.CreateGround('ground', width, height, subdivisions, scene)
     ground.position.y = -0.01
-    addPhysicsImposter(ground, 'BoxImpostor', scene)
+    addPhysicsImposter(ground, 'BoxImpostor', scene, 0)
   }
 
   {

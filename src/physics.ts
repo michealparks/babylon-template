@@ -6,22 +6,24 @@ import { AmmoJSPlugin } from '@babylonjs/core/Physics/Plugins/ammoJSPlugin'
 import { PhysicsImpostor } from  '@babylonjs/core/Physics/physicsImpostor'
 
 // @TODO: this is a pretty sloppy connection to ammo, can be improved
-export const initPhysics = async () => {
+export const initPhysics = async (scene: Scene) => {
   // @ts-ignore
   const Ammo: any = await globalThis.InitAmmo()
   const useDeltaForWorldStep = true
   const gravityVector = new Vector3(0, -9.81, 0)
   const ammoPlugin = new AmmoJSPlugin(useDeltaForWorldStep, Ammo)
 
-  // @ts-ignore
   scene.enablePhysics(gravityVector, ammoPlugin)
 }
 
 export const addPhysicsImposter = (
   mesh: Mesh,
   imposterType: 'SphereImpostor' | 'BoxImpostor',
-  scene: Scene
+  scene: Scene,
+  mass: number = 1,
+  restitution: number = 0.9
 ) => {
-  // @ts-ignore
-  mesh.physicsImpostor = new PhysicsImpostor(mesh, PhysicsImpostor[imposterType], { mass: 1, restitution: 0.9 }, scene)
+  const imposter = PhysicsImpostor[imposterType]
+  const opts = { mass, restitution }
+  mesh.physicsImpostor = new PhysicsImpostor(mesh, imposter, opts, scene)
 }

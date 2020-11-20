@@ -22,9 +22,9 @@
     "ammo.js": "github:kripken/ammo.js",
     "rollup-plugin-copy": "^3.3.0",
     "snowpack": "^2.17.1",
-    "typescript": "^4.0.5"
+    "typescript": "^4.1.2"
   },
   "dependencies": {
-    "rollup": "^2.33.1"
+    "rollup": "^2.33.3"
   }
 }

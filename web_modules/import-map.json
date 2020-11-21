@@ -1,0 +1,23 @@
+{
+  "imports": {
+    "@babylonjs/core/Cameras/freeCamera": "./@babylonjs/core/Cameras/freeCamera.js",
+    "@babylonjs/core/Debug/debugLayer": "./@babylonjs/core/Debug/debugLayer.js",
+    "@babylonjs/core/Engines/engine": "./@babylonjs/core/Engines/engine.js",
+    "@babylonjs/core/Lights/hemisphericLight": "./@babylonjs/core/Lights/hemisphericLight.js",
+    "@babylonjs/core/Lights/spotLight": "./@babylonjs/core/Lights/spotLight.js",
+    "@babylonjs/core/Loading": "./@babylonjs/core/Loading.js",
+    "@babylonjs/core/Loading/loadingScreen": "./@babylonjs/core/Loading/loadingScreen.js",
+    "@babylonjs/core/Materials/Textures/Loaders/envTextureLoader": "./@babylonjs/core/Materials/Textures/Loaders/envTextureLoader.js",
+    "@babylonjs/core/Materials/standardMaterial": "./@babylonjs/core/Materials/standardMaterial.js",
+    "@babylonjs/core/Maths/math": "./@babylonjs/core/Maths/math.js",
+    "@babylonjs/core/Meshes/mesh": "./@babylonjs/core/Meshes/mesh.js",
+    "@babylonjs/core/Meshes/meshBuilder": "./@babylonjs/core/Meshes/meshBuilder.js",
+    "@babylonjs/core/Physics/Plugins/ammoJSPlugin": "./@babylonjs/core/Physics/Plugins/ammoJSPlugin.js",
+    "@babylonjs/core/Physics/physicsEngineComponent": "./@babylonjs/core/Physics/physicsEngineComponent.js",
+    "@babylonjs/core/Physics/physicsImpostor": "./@babylonjs/core/Physics/physicsImpostor.js",
+    "@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/defaultRenderingPipeline": "./@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/defaultRenderingPipeline.js",
+    "@babylonjs/core/scene": "./@babylonjs/core/scene.js",
+    "@babylonjs/inspector": "./@babylonjs/inspector.js",
+    "@babylonjs/loaders/glTF": "./@babylonjs/loaders/glTF.js"
+  }
+}

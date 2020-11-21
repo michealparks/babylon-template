@@ -50,8 +50,6 @@ camera.attachControl(canvas, noPreventDefault)
   light.intensity = 40
 }
 
-// Render every frame
-
 const init = async () => {
   const promises: [Promise<Scene>?, Promise<void>?, Promise<any>?] = []
 
@@ -101,7 +99,7 @@ const init = async () => {
     addPhysicsImposter(sphere, 'SphereImpostor', scene)
   }
 
-  addPostProcess(scene, [camera])
+  // addPostProcess(scene, [camera])
 
   engine.runRenderLoop(() => {
     scene.render()

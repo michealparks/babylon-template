@@ -99,7 +99,7 @@ const init = async () => {
     addPhysicsImposter(sphere, 'SphereImpostor', scene)
   }
 
-  // addPostProcess(scene, [camera])
+  addPostProcess(scene, [camera])
 
   engine.runRenderLoop(() => {
     scene.render()

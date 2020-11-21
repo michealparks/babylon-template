@@ -13,7 +13,6 @@ import "../web_modules/@babylonjs/core/Materials/standardMaterial.js";
 import "../web_modules/@babylonjs/core/Physics/physicsEngineComponent.js";
 import "../web_modules/@babylonjs/loaders/glTF.js";
 import {initPhysics, addPhysicsImposter} from "./physics.js";
-import {addPostProcess as addPostProcess2} from "./addPostProcess.js";
 const antialias = true;
 const adaptToDeviceRatio = true;
 const engineOptions = {};
@@ -78,7 +77,6 @@ const init = async () => {
     sphere.position.y = 5;
     addPhysicsImposter(sphere, "SphereImpostor", scene2);
   }
-  addPostProcess2(scene2, [camera]);
   engine2.runRenderLoop(() => {
     scene2.render();
   });

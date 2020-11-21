@@ -26,10 +26,13 @@ const prodPlugins = PROD ? [
 const configs = [
   {
     input: 'node_modules/ammo.js/builds/ammo.wasm.js',
-    output: {
+    output: [{
       file: 'public/ammo.js',
       format: 'es'
-    },
+    }, {
+      file: 'build/ammo.js',
+      format: 'es'
+    }],
     plugins: [
       alias({
         entries: {

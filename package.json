@@ -3,7 +3,8 @@
     "start": "snowpack dev",
     "build": "snowpack build",
     "rollup-start": "rollup -c --environment DEV",
-    "rollup-build": "rollup -c --environment PROD"
+    "rollup-build": "rollup -c --environment PROD",
+    "gh-pages": "node ./scripts/gh-pages.js"
   },
   "devDependencies": {
     "@babylonjs/core": "^4.2.0",

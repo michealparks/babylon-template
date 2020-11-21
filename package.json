@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "start": "node --max-old-space-size=4096 ./node_modules/snowpack/index.bin.js dev --polyfill-node",
-    "build": "node --max-old-space-size=4096 ./node_modules/snowpack/index.bin.js build --polyfill-node",
-    "rollup": "rollup -c"
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "rollup-start": "rollup -c --environment DEV",
+    "rollup-build": "rollup -c --environment PROD"
   },
   "devDependencies": {
     "@babylonjs/core": "^4.2.0",
@@ -14,17 +15,18 @@
     "@babylonjs/procedural-textures": "^4.2.0",
     "@babylonjs/serializers": "^4.2.0",
     "@rollup/plugin-alias": "^3.1.1",
-    "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
+    "@rollup/plugin-replace": "^2.3.4",
+    "@rollup/plugin-typescript": "^6.1.0",
     "@snowpack/plugin-optimize": "^0.2.9",
     "@snowpack/plugin-typescript": "^1.1.0",
     "@types/snowpack-env": "^2.3.2",
     "ammo.js": "github:kripken/ammo.js",
+    "rollup": "^2.33.3",
     "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-filesize": "^9.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "snowpack": "^2.17.1",
     "typescript": "^4.1.2"
-  },
-  "dependencies": {
-    "rollup": "^2.33.3"
   }
 }

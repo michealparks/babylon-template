@@ -43,7 +43,7 @@ const init = async () => {
   const promises = [];
   promises.push(SceneLoader.AppendAsync("./assets/glb/", "pixel_room.glb", scene2));
   promises.push(initPhysics(scene2));
-  if ('production' === "development") {
+  if ('development' === "development") {
     promises.push(import("../web_modules/@babylonjs/core/Debug/debugLayer.js"));
     promises.push(import("../web_modules/@babylonjs/inspector.js"));
     let inspectorOpen = true;

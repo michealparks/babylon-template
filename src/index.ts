@@ -10,17 +10,19 @@ import { SceneLoader } from '@babylonjs/core/Loading'
 // Required side effects to populate the Create methods on the mesh class.
 // Without this, the bundle would be smaller but the createXXX methods from mesh would not be accessible.
 import '@babylonjs/core/Meshes/meshBuilder'
+
+import "@babylonjs/core/Materials/Textures/Loaders/envTextureLoader"
+import "@babylonjs/core/Loading/loadingScreen"
 import '@babylonjs/core/Materials/standardMaterial'
 import '@babylonjs/core/Physics/physicsEngineComponent'
+import '@babylonjs/loaders/glTF'
 
 import { initPhysics, addPhysicsImposter } from './physics'
 import { addPostProcess } from './addPostProcess'
 
 const antialias = true
 const adaptToDeviceRatio = true
-const engineOptions = {
-  
-}
+const engineOptions = {}
 
 const canvas = document.getElementById('canvas') as HTMLCanvasElement
 const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio)
@@ -51,13 +53,16 @@ camera.attachControl(canvas, noPreventDefault)
 // Render every frame
 
 const init = async () => {
-  const promises: any = []
+  const promises: [Promise<Scene>?, Promise<void>?, Promise<any>?] = []
+
+  promises.push(SceneLoader.AppendAsync('./assets/glb/', 'pixel_room.glb', scene))
+  promises.push(initPhysics(scene))
 
   if (import.meta.env.MODE === 'development') {
     promises.push(import('@babylonjs/core/Debug/debugLayer'))
     promises.push(import('@babylonjs/inspector'))
 
-    let inspectorOpen = false
+    let inspectorOpen = true
 
     addEventListener('keydown', (e) => {
       if (e.key.toLowerCase() === 'i') {
@@ -70,7 +75,14 @@ const init = async () => {
     })
   }
 
-  await initPhysics(scene)
+  const [gltf] = await Promise.all(promises)
+
+  scene.debugLayer.show()
+
+  const NEAREST_NEAREST = 8
+  for (const texture of gltf.textures) {
+    texture.updateSamplingMode(NEAREST_NEAREST)
+  }
 
   {
     const width = 3.8
@@ -87,14 +99,6 @@ const init = async () => {
     const sphere = Mesh.CreateSphere('sphere', segments, diameter, scene)
     sphere.position.y = 5
     addPhysicsImposter(sphere, 'SphereImpostor', scene)
-  }
-
-  await Promise.all(promises)
-
-  const gltf = await SceneLoader.AppendAsync('./assets/glb/', 'pixel_room.glb', scene)
-
-  for (const texture of gltf.textures) {
-    texture.updateSamplingMode(8)
   }
 
   addPostProcess(scene, [camera])

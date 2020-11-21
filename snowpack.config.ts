@@ -9,7 +9,6 @@ export default {
   ],
   exclude: [
     'ammo.js',
-    'ammo.wasm.js',
     '**/node_modules/**/*',
     '**/__tests__/*',
     '**/*.@(spec|test).@(js|mjs)'

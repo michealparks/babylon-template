@@ -10,12 +10,10 @@ const { DEV, PROD } = process.env
 
 const prodPlugins = PROD ? [
   terser({
-    
     compress: {
       drop_console: true,
       ecma: '2020',
       keep_infinity: true,
-      module: true,
       passes: 2
     },
     format: {
@@ -35,8 +33,8 @@ const configs = [
     plugins: [
       alias({
         entries: {
-          fs: require.resolve('./scripts/shims/noop'),
-          path: require.resolve('./scripts/shims/noop')
+          fs: require.resolve('./scripts/noop'),
+          path: require.resolve('./scripts/noop')
         }
       }),
       copy({

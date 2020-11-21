@@ -29,7 +29,7 @@ export const addPostProcess = (scene: Scene, cameras: Camera[]) => {
   pipeline.bloomScale = 0.5
 
   // Depth of field
-  pipeline.depthOfFieldEnabled = true
+  pipeline.depthOfFieldEnabled = false
   // distance of the current focus point from the camera in millimeters considering 1 scene unit is 1 meter
   pipeline.depthOfField.focusDistance = 2000
   // focal length of the camera in millimeters  

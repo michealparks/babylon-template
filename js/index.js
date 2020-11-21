@@ -1,6 +1,3 @@
-import __SNOWPACK_ENV__ from '../__snowpack__/env.js';
-import.meta.env = __SNOWPACK_ENV__;
-
 import {Engine} from "../web_modules/@babylonjs/core/Engines/engine.js";
 import {Scene} from "../web_modules/@babylonjs/core/scene.js";
 import {Vector3} from "../web_modules/@babylonjs/core/Maths/math.js";
@@ -46,7 +43,7 @@ const init = async () => {
   const promises = [];
   promises.push(SceneLoader.AppendAsync("./assets/glb/", "pixel_room.glb", scene2));
   promises.push(initPhysics(scene2));
-  if (import.meta.env.MODE === "development") {
+  if ('production' === "development") {
     promises.push(import("../web_modules/@babylonjs/core/Debug/debugLayer.js"));
     promises.push(import("../web_modules/@babylonjs/inspector.js"));
     let inspectorOpen = true;

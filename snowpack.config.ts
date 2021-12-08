@@ -2,7 +2,7 @@
 export default {
   mount: {
     public: '/',
-    src: '/js',
+    src: '/',
   },
   plugins: [
     '@snowpack/plugin-typescript',

@@ -1,3 +1,4 @@
+import './index.css'
 import { Engine } from '@babylonjs/core/Engines/engine'
 import { Scene } from '@babylonjs/core/scene'
 import { Vector3 } from '@babylonjs/core/Maths/math'
@@ -13,6 +14,7 @@ import "@babylonjs/core/Materials/Textures/Loaders/envTextureLoader"
 import "@babylonjs/core/Loading/loadingScreen"
 import '@babylonjs/core/Materials/standardMaterial'
 import '@babylonjs/core/Physics/physicsEngineComponent'
+import "@babylonjs/core/Meshes/Builders/groundBuilder"
 import '@babylonjs/loaders/glTF'
 
 import { initPhysics, addPhysicsImposter } from './physics'

@@ -1,7 +1,4 @@
 import alias from '@rollup/plugin-alias'
-import { nodeResolve } from '@rollup/plugin-node-resolve'
-import typescript from '@rollup/plugin-typescript'
-import replace from '@rollup/plugin-replace'
 import copy from 'rollup-plugin-copy'
 import { terser } from 'rollup-plugin-terser'
 import filesize from 'rollup-plugin-filesize'
@@ -52,24 +49,5 @@ const configs = [
     ]
   }
 ]
-
-if (PROD) configs.push({
-  preserveEntrySignatures: false,
-  input: 'src/index.ts',
-  output: {
-    file: 'public/_dist_/index.js',
-    format: 'es'
-  },
-  plugins: [
-    replace({
-      'import.meta.env.MODE': '"production"'
-    }),
-    typescript({
-      incremental: false
-    }),
-    nodeResolve(),
-    ...prodPlugins
-  ]
-})
 
 export default configs

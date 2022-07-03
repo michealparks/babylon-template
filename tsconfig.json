@@ -1,11 +1,10 @@
 {
   "include": ["src"],
-  "types": ["babylonjs"],
-  "lib": ["dom"],
   "compilerOptions": {
-    "module": "esnext",
-    "target": "esnext",
-    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "DOM"],
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
@@ -20,6 +19,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
 
     // You can't currently define paths in your 'extends' config,
     // so we have to set 'baseUrl' & 'paths' here.

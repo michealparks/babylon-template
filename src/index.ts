@@ -3,7 +3,7 @@ import './index.css'
 import { Engine } from '@babylonjs/core/Engines/engine'
 import { Scene } from '@babylonjs/core/scene'
 import { Vector3 } from '@babylonjs/core/Maths/math'
-import { FreeCamera } from '@babylonjs/core/Cameras/freeCamera'
+import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera'
 import { SceneLoader } from '@babylonjs/core/Loading'
 import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder'
 
@@ -27,7 +27,12 @@ const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
 
 const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio)
 const scene = new Scene(engine)
-const camera = new FreeCamera('camera', new Vector3(-4, 5, 10), scene)
+
+const alpha = 0
+const beta = 0
+const radius = 5
+const target = new Vector3(-4, 5, 10)
+const camera = new ArcRotateCamera('camera', alpha, beta, radius, target, scene)
 camera.setTarget(Vector3.Zero())
 camera.attachControl(canvas, true)
 

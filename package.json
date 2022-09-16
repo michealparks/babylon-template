@@ -8,21 +8,21 @@
     "rollup-build": "rollup -c --environment PROD"
   },
   "devDependencies": {
-    "@babylonjs/core": "^5.13.3",
-    "@babylonjs/gui": "^5.13.3",
-    "@babylonjs/inspector": "^5.13.3",
-    "@babylonjs/loaders": "^5.13.3",
-    "@babylonjs/materials": "^5.13.3",
-    "@babylonjs/post-processes": "^5.13.3",
-    "@babylonjs/procedural-textures": "^5.13.3",
-    "@babylonjs/serializers": "^5.13.3",
+    "@babylonjs/core": "^5.24.0",
+    "@babylonjs/gui": "^5.24.0",
+    "@babylonjs/inspector": "^5.24.0",
+    "@babylonjs/loaders": "^5.24.0",
+    "@babylonjs/materials": "^5.24.0",
+    "@babylonjs/post-processes": "^5.24.0",
+    "@babylonjs/procedural-textures": "^5.24.0",
+    "@babylonjs/serializers": "^5.24.0",
     "@rollup/plugin-alias": "^3.1.9",
     "ammo.js": "github:kripken/ammo.js",
-    "rollup": "^2.75.7",
+    "rollup": "^2.79.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-filesize": "^9.1.2",
     "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.7.4",
-    "vite": "^2.9.13"
+    "typescript": "^4.8.3",
+    "vite": "^3.1.1"
   }
 }

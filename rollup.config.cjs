@@ -1,7 +1,7 @@
-import alias from '@rollup/plugin-alias'
-import copy from 'rollup-plugin-copy'
-import { terser } from 'rollup-plugin-terser'
-import filesize from 'rollup-plugin-filesize'
+const alias = require('@rollup/plugin-alias')
+const copy = require('rollup-plugin-copy')
+const { terser } = require('rollup-plugin-terser')
+const filesize = require('rollup-plugin-filesize')
 
 const { DEV, PROD } = process.env
 
@@ -50,4 +50,4 @@ const configs = [
   }
 ]
 
-export default configs
+module.exports = configs

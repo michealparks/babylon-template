@@ -1,7 +1,6 @@
 # babylon-template
-A project template for Babylon.js + Typescript
+A project template for Vite + Babylon.js + Havok Physics + Typescript
 
 ### Getting started
 1. `npm install`
-2. `npm run rollup-start` Builds ammo.js
-3. `npm start` Runs snowpack
+2. `npm start` Runs vite

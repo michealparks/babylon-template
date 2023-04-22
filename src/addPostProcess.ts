@@ -1,7 +1,4 @@
-import type { Camera } from '@babylonjs/core/Cameras/camera'
-import type { Scene } from '@babylonjs/core/scene'
-
-import { DefaultRenderingPipeline } from '@babylonjs/core/PostProcesses/RenderPipeline/Pipelines/defaultRenderingPipeline'
+import { type Camera, type Scene, DefaultRenderingPipeline } from '@babylonjs/core'
 
 export const addPostProcess = (scene: Scene, cameras: Camera[]) => {
   const hdr = true
@@ -24,7 +21,7 @@ export const addPostProcess = (scene: Scene, cameras: Camera[]) => {
   // Bloom
   pipeline.bloomEnabled = true
   pipeline.bloomThreshold = 0.2
-  pipeline.bloomWeight = 0.3
+  pipeline.bloomWeight = 0.1
   pipeline.bloomKernel = 64
   pipeline.bloomScale = 0.5
 

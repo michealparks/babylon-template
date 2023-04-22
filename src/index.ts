@@ -1,91 +1,90 @@
 import './index.css'
-// import { WebGPUEngine } from '@babylonjs/core/Engines/webgpuEngine'
-import { Engine } from '@babylonjs/core/Engines/engine'
-import { Scene } from '@babylonjs/core/scene'
-import { Vector3 } from '@babylonjs/core/Maths/math'
-import { ArcRotateCamera } from '@babylonjs/core/Cameras/arcRotateCamera'
-import { SceneLoader } from '@babylonjs/core/Loading'
-import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder'
-
-import "@babylonjs/core/Materials/Textures/Loaders/envTextureLoader"
-import "@babylonjs/core/Loading/loadingScreen"
-import '@babylonjs/core/Materials/standardMaterial'
-import '@babylonjs/core/Physics/physicsEngineComponent'
-import "@babylonjs/core/Meshes/Builders/groundBuilder"
+import * as BABYLON from '@babylonjs/core'
 import '@babylonjs/loaders/glTF'
-
 import { initPhysics, addPhysicsImposter } from './physics'
 import { addPostProcess } from './addPostProcess'
 
+BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = () => {}
+
+const canvas = document.createElement('canvas')
+document.body.append(canvas)
+
 const antialias = true
 const adaptToDeviceRatio = true
-const engineOptions = {}
 
-const canvas = document.querySelector<HTMLCanvasElement>('#canvas')!
-// const engine = new WebGPUEngine(canvas);
-// await engine.initAsync();
+let engine: BABYLON.Engine | BABYLON.WebGPUEngine
 
-const engine = new Engine(canvas, antialias, engineOptions, adaptToDeviceRatio)
-const scene = new Scene(engine)
+if (navigator.gpu) {
+  engine = new BABYLON.WebGPUEngine(canvas, { antialias, adaptToDeviceRatio })
+  await (engine as BABYLON.WebGPUEngine).initAsync()
+} else {
+  engine = new BABYLON.Engine(canvas, antialias, {}, adaptToDeviceRatio)
+}
+
+const scene = new BABYLON.Scene(engine)
 
 const alpha = 0
 const beta = 0
 const radius = 5
-const target = new Vector3(-4, 5, 10)
-const camera = new ArcRotateCamera('camera', alpha, beta, radius, target, scene)
-camera.setTarget(Vector3.Zero())
+const target = new BABYLON.Vector3(-4, 1, 5)
+const camera = new BABYLON.ArcRotateCamera('camera', alpha, beta, radius, target, scene)
+
+camera.setTarget(BABYLON.Vector3.Zero())
 camera.attachControl(canvas, true)
 
-const promises: [Promise<Scene>?, Promise<void>?, Promise<unknown>?] = [
-  SceneLoader.AppendAsync('./assets/glb/', 'pixel_room.glb', scene),
+await Promise.all([
+  BABYLON.SceneLoader.AppendAsync('assets/glb/', 'pixel_room.glb', scene),
   initPhysics(scene)
-]
+])
+
+let inspectorReady = false
+let inspectorOpen = true
 
 if (import.meta.env.MODE === 'development') {
-  promises.push(import('@babylonjs/core/Debug/debugLayer'))
-  promises.push(import('@babylonjs/inspector'))
+  window.addEventListener('keydown', async ({ key }) => {
+    if (key.toLowerCase() !== 'i') return
+  
+    if (inspectorReady === false) {
+      await import('@babylonjs/core/Debug/debugLayer')
+      await import('@babylonjs/inspector')
+      inspectorReady = true
+    }
 
-  let inspectorOpen = true
-
-  addEventListener('keydown', (e) => {
-    if (e.key.toLowerCase() === 'i') {
-      if (inspectorOpen === true) {
-        scene.debugLayer.hide()
-      } else {
-        scene.debugLayer.show()
-      }
+    if (inspectorOpen === true) {
+      localStorage.setItem('inspector', 'true')
+      scene.debugLayer.hide()
+    } else {
+      localStorage.removeItem('inspector')
+      scene.debugLayer.show()
     }
   })
+
+  if (localStorage.getItem('inspector')) {
+    scene.debugLayer.show()
+  }  
 }
 
-const [gltf] = await Promise.all(promises)
-
-scene.debugLayer.show()
-
-const NEAREST_NEAREST = 8
-for (const texture of gltf!.textures) {
-  texture.updateSamplingMode(NEAREST_NEAREST)
+for (const texture of scene.textures) {
+  texture.updateSamplingMode(1)
 }
 
 {
   const width = 3.8
   const height = 3.8
   const subdivisions = 1
-  const ground = MeshBuilder.CreateGround('ground', { width, height, subdivisions }, scene)
+  const ground = BABYLON.MeshBuilder.CreateGround('ground', { width, height, subdivisions }, scene)
   ground.position.y = -0.01
-  addPhysicsImposter(ground, 'BoxImpostor', scene, 0)
+  addPhysicsImposter(ground, BABYLON.PhysicsShapeType.BOX, scene, 0)
 }
 
 {
   const segments = 32
   const diameter = 1
-  const sphere = MeshBuilder.CreateSphere('sphere', { segments, diameter }, scene)
+  const sphere = BABYLON.MeshBuilder.CreateSphere('sphere', { segments, diameter }, scene)
   sphere.position.y = 5
-  addPhysicsImposter(sphere, 'SphereImpostor', scene)
+  addPhysicsImposter(sphere, BABYLON.PhysicsShapeType.SPHERE, scene)
 }
 
 addPostProcess(scene, [camera])
 
-engine.runRenderLoop(() => {
-  scene.render()
-})
+engine.runRenderLoop(() => scene.render())
